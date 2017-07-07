@@ -1,0 +1,80 @@
+
+<!-- Page for after you have selected a customer-->
+<head>
+  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/style.css') }}">
+</head>
+<div>
+<h2>Hello {{data[0][1]}} {{data[0][2]}}</h2>
+<br>
+Profile Info
+<!-- profile info -->
+<table>
+{% for row in data %}
+   <tr>
+        {% for cell in row %}
+        <td> {{ cell }} </td>
+        {% endfor %}
+   </tr>
+{% endfor %}
+</table>
+<br>
+Viewed Movies
+<table>
+{% for row in movies %}
+   <tr>
+        {% for cell in row %}
+        <td> {{ cell }} </td>
+        {% endfor %}
+        <td> 
+        <form action="/customerUpdateRating" method="post">
+            <input type="hidden" name="idShowing" value={{row[2]}}>
+            Set New Rating: 
+            <select name="value">
+            {% for n in range(1,6) %}
+                <option value={{n}}>{{n}}</option>
+            {% endfor %}
+            </select>
+            <input type="submit" value="Submit">
+        </form>
+    
+    </td>
+   </tr>
+{% endfor %}
+</table>
+<br>
+ <br>
+<!-- form to find for showing -->
+Search for Showing
+ <form action="/searchForShowing?id={{id}}" method="post">
+    Genre: 
+    <select name="genre">
+                    <option value="any">any</option>
+                {% for n in genres %}
+                    <option value={{n[0]}}>{{n[0]}}</option>
+                {% endfor %}
+    </select>
+    <br>
+    Start Date:
+    <select name="startDate">
+                {% for n in showings %}
+                    <option value="{{n[1]}}">{{n[1]}}</option>
+                {% endfor %}
+    </select>
+    <br>
+    End Date:
+    <select name="endDate">
+                {% for n in showings %}
+                    <option value="{{n[1]}}" selected>{{n[1]}}</option>
+                {% endfor %}
+    </select>
+    <br>
+    Has Seats: 
+    <input type="checkbox" name="seatsAvailable">
+    <br>
+    Movie Title:
+    <input type="text" name="MovieName">
+    <br>
+    <input type="submit" value="Search">
+</form>
+
+</div>

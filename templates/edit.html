@@ -1,0 +1,14 @@
+<!-- Page where you can add another tuple to a table -->
+
+<head>
+  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/style.css') }}">
+</head>
+
+{{name}}
+<form action={{command}} method="post">
+    {% for row in data %}
+     {{row[0]}}: 
+     <input type="text" name={{row[0]}} value=""><br>
+    {% endfor %}
+     <input type="submit" value="Submit">
+ </form>

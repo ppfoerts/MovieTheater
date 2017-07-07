@@ -1,0 +1,32 @@
+<!-- page for showings-->
+
+<head>
+  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/style.css') }}">
+</head>
+<div>
+<h2>{{type}}</h2>
+<table>
+{% for row in data %}
+   <tr>
+        {% for cell in row %}
+        <td> {{ cell }} </td>
+        {% endfor %}
+        <td> 
+            <form action="/addAttend?id={{id}}" method="post">
+                Rating:
+                <select name="rating">
+                {% for n in range(1,6) %}
+                    <option value={{n}}>{{n}}</option>
+                {% endfor %}
+                </select>
+                <input type="hidden" name="idShowing" value="{{row[0]}}">
+                <input type="submit" value="Attend">
+            </form>
+        </td>
+   </tr>
+{% endfor %}
+</table>
+<br>
+<br>
+<a href="/customerInfo?id={{id}}" class="btn btn-outline btn-xl page-scroll">Return back to Customer Page</a>
+</div>

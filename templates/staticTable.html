@@ -1,0 +1,30 @@
+<!-- The table for attends, this was originally also for genre, but the change to that, prompted a new html -->
+
+<head>
+  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/style.css') }}">
+</head>
+
+<div>
+<h2>{{type}}</h2>
+<table>
+    <tr>
+        <th>Showing Id</th>
+        <th>Rating</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Date & Time</th>
+        <th>Movie Id</th>
+        <th>Movie Name</th>
+    <tr>
+{% for row in data %}
+   <tr>
+        {% for cell in row %}
+        <td> {{ cell }} </td>
+        {% endfor %}
+   </tr>
+{% endfor %}
+</table>
+<br>
+<br>
+<a href="/staff" class="btn btn-outline btn-xl page-scroll">Return back to Staff Page</a>
+</div>
